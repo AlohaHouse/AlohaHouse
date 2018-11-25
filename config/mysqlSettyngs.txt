@@ -1,0 +1,4 @@
+$ mysql -u root
+$ create database AlohaHouse
+
+# user,パスワードはデプロイ時に検討
