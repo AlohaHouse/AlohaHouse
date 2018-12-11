@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 # アプリ名.apps.アプリ名Config
 INSTALLED_APPS = [
+    'accounts.apps.AccountsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -55,7 +56,9 @@ ROOT_URLCONF = 'AlohaHouse.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -124,3 +127,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
         os.path.join(BASE_DIR, 'static'),
 )
+
+# ログイン後の遷移先
+LOGIN_REDIRECT_URL = '/'
