@@ -128,5 +128,9 @@ STATICFILES_DIRS = (
         os.path.join(BASE_DIR, 'static'),
 )
 
+LOGIN_URL = 'accounts:login'
 # ログイン後の遷移先
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'accounts:mypage'
+
+# ログアウト後の遷移先
+LOGOUT_REDIRECT_URL = 'accounts:login'
