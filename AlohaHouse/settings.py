@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 # アプリ名.apps.アプリ名Config
 INSTALLED_APPS = [
+    'masterdata.apps.MasterdataConfig',
     'accounts.apps.AccountsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
