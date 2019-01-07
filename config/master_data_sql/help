@@ -1,0 +1,4 @@
+# テーブルのデータ削除(IDを1からできる)
+set foreign_key_checks = 0;
+truncate table AlohaHouse.masterdata_route;
+set foreign_key_checks = 1;

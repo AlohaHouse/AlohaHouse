@@ -1,0 +1,21 @@
+INSERT INTO AlohaHouse.masterdata_route(company_id,name,color_code, created_at, updated_at) VALUE(1,'山手線','#99cc00',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO AlohaHouse.masterdata_route(company_id,name,color_code, created_at, updated_at) VALUE(1,'京浜東北線','#00bae8',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO AlohaHouse.masterdata_route(company_id,name,color_code, created_at, updated_at) VALUE(1,'横須賀線','#007ac0',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO AlohaHouse.masterdata_route(company_id,name,color_code, created_at, updated_at) VALUE(2,'南北線','#008000',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO AlohaHouse.masterdata_route(company_id,name,color_code, created_at, updated_at) VALUE(2,'半蔵門線','#A757A8',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO AlohaHouse.masterdata_route(company_id,name,color_code, created_at, updated_at) VALUE(2,'副都心線','#BB6633',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO AlohaHouse.masterdata_route(company_id,name,color_code, created_at, updated_at) VALUE(2,'銀座線','#F7931D',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO AlohaHouse.masterdata_route(company_id,name,color_code, created_at, updated_at) VALUE(2,'千代田線','#009933',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO AlohaHouse.masterdata_route(company_id,name,color_code, created_at, updated_at) VALUE(3,'都営三田線','#0079C2',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO AlohaHouse.masterdata_route(company_id,name,color_code, created_at, updated_at) VALUE(3,'都営浅草線','#E85298',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO AlohaHouse.masterdata_route(company_id,name,color_code, created_at, updated_at) VALUE(3,'都営大江戸線','#B6007A',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO AlohaHouse.masterdata_route(company_id,name,color_code, created_at, updated_at) VALUE(4,'京急線','#00CCFF',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO AlohaHouse.masterdata_route(company_id,name,color_code, created_at, updated_at) VALUE(4,'東急池上線','#EE86A7',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO AlohaHouse.masterdata_route(company_id,name,color_code, created_at, updated_at) VALUE(4,'東急目黒線','#009CD2',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO AlohaHouse.masterdata_route(company_id,name,color_code, created_at, updated_at) VALUE(4,'東急東横線','#DA0442',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO AlohaHouse.masterdata_route(company_id,name,color_code, created_at, updated_at) VALUE(4,'東急田園都市線','#20A288',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO AlohaHouse.masterdata_route(company_id,name,color_code, created_at, updated_at) VALUE(4,'東急大井町線','#F18C43',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO AlohaHouse.masterdata_route(company_id,name,color_code, created_at, updated_at) VALUE(4,'京王井の頭線','#75140c',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO AlohaHouse.masterdata_route(company_id,name,color_code, created_at, updated_at) VALUE(4,'小田急線','#3a3b7b',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+
+INSERT INTO AlohaHouse.masterdata_	route	(company_id,name,color_code, created_at, updated_at) VALUE( VALUE(	1	山手線	#99cc00	,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);			=CONCATENATE($B$2,$C$2,$D$2,E2, ",","'",F2,"'" ,"," ,"'", G2,"'",$H$2)
