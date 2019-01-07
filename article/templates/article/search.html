@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<form action="{% url 'article:search' %}" method="get">
+  <!-- {% for company in company_list %}
+  <div>
+    <h2>{{ company }}</h2>
+
+    {% for route in company.route_set.all %}
+    <p style="background-color:{{ route.color_code }};">{{ route }}</p>
+
+      {% for station in route.station_set.all %}
+      <input name="stations" type="checkbox" value="{{ station.code }}">{{ station }}</input>
+      {% endfor %}
+
+    {% endfor %}
+  </div>
+  {% endfor %} -->
+  {{ form.station. }}
+  {% csrf_token %}
+  <button type="submit">検索</button>
+</form>
+
+{% endblock %}

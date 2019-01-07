@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 # アプリ名.apps.アプリ名Config
 INSTALLED_APPS = [
+    'article.apps.ArticleConfig',
     'masterdata.apps.MasterdataConfig',
     'accounts.apps.AccountsConfig',
     'django.contrib.admin',
@@ -40,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # デバッグよう
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +53,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # デバッグ用
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'AlohaHouse.urls'
@@ -135,3 +140,6 @@ LOGIN_REDIRECT_URL = 'accounts:mypage'
 
 # ログアウト後の遷移先
 LOGOUT_REDIRECT_URL = 'accounts:login'
+
+# デバッグ用
+INTERNAL_IPS = ['127.0.0.1']
