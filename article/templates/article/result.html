@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+物件名一覧<br>
+{% for i in article_names %}
+{{ i }}<br>
+{% endfor %}
+
+住所一覧
+{% for i in addresses %}
+{{ i }}<br>
+{% endfor %}
+
+{% endblock %}
