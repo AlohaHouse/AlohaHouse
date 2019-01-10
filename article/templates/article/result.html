@@ -1,14 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
-物件名一覧<br>
-{% for i in article_names %}
-{{ i }}<br>
-{% endfor %}
 
-住所一覧
-{% for i in addresses %}
-{{ i }}<br>
-{% endfor %}
+{% load resulttag %}
+<table class="table col-10 mx-auto">
+<thead>
+  <tr>
+    <th>物件</th>
+    <th>住所</th>
+  </tr>
+</thead>
+
+<tbody>
+  {% for c in 0|range:article_names %}
+  <tr>
+    <td>{{ article_names|lookup:c }}</td>
+    <td>{{ addresses|lookup:c }}</td>
+  </tr>
+  {% endfor %}
+</tbody>
+</table>
 
 {% endblock %}
