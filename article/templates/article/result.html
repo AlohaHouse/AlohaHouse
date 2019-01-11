@@ -6,6 +6,7 @@
 <table class="table col-10 mx-auto">
 <thead>
   <tr>
+    <th>物件画像</th>
     <th>物件</th>
     <th>住所</th>
   </tr>
@@ -14,6 +15,7 @@
 <tbody>
   {% for c in 0|range:article_names %}
   <tr>
+    <td><img src='{{ article_images|lookup:c }}' alt="ライオンの画像" width="314" height="229" border="0" /></td>
     <td>{{ article_names|lookup:c }}</td>
     <td>{{ addresses|lookup:c }}</td>
   </tr>

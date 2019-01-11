@@ -77,6 +77,17 @@ class ResultView(TemplateView):
             arg4 = arg3.find("li", class_="cassetteitem_detail-col1").text
             addresses.append(arg4)
 
+        #建物の画像取得（取得後配列で保持）
+        article_images = [] #配列の初期化
+        for cassetteitem in cassetteitems:
+            arg1 = cassetteitem.find("div", class_="cassetteitem-detail")
+            arg2 = arg1.find("div", class_="cassetteitem-detail-object")
+            arg3 = arg1.find("img")
+            # relタグの値を抽出
+            rel = arg3['rel']
+            article_images.append(rel)
+
         context["article_names"] = article_names
         context["addresses"] = addresses
+        context["article_images"] = article_images
         return context
