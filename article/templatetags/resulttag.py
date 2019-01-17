@@ -13,4 +13,4 @@ def lookup(value, arg):
 '''for文を配列の回数分回すために必要'''
 @register.filter(name='range')
 def filter_range(start, array):
-  return range(start, len(array))
+    return range(start, len(array))
