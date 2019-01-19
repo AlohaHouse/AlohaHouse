@@ -47,7 +47,7 @@ class SearchView(View):
     # 駅、こだわり選択画面
     template_name = 'article/search.html'
     # 物件一覧画面
-    success_url = 'article:list'
+    success_url = 'article:result'
 
 
     def get(self, request, *args, **kwargs):
@@ -92,7 +92,13 @@ class ResultView(TemplateView):
 
     template_name = 'article/result.html'
 
-    def get_context_data(self, **kwargs):
+    # requestを使用する為にオーバーライド
+    def get(self, request, **kwargs):
+        context = self.get_context_data(request)
+        return self.render_to_response(context)
+
+
+    def get_context_data(self,request, **kwargs):
         # アクセスするURL（実際はセッションから取得）
         data = request.session['search_data']
         url = data.get_suumo_params()
