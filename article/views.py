@@ -47,7 +47,7 @@ class SearchView(View):
     # 駅、こだわり選択画面
     template_name = 'article/search.html'
     # 物件一覧画面
-    success_url = 'article:list'
+    success_url = 'article:result'
 
 
     def get(self, request, *args, **kwargs):
