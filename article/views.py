@@ -92,7 +92,13 @@ class ResultView(TemplateView):
 
     template_name = 'article/result.html'
 
-    def get_context_data(self, **kwargs):
+    # requestを使用する為にオーバーライド
+    def get(self, request, **kwargs):
+        context = self.get_context_data(request)
+        return self.render_to_response(context)
+
+
+    def get_context_data(self,request, **kwargs):
         # アクセスするURL（実際はセッションから取得）
         data = request.session['search_data']
         url = data.get_suumo_params()
