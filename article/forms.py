@@ -1,37 +1,57 @@
 from django import forms
 from masterdata.models import Station, Route
 
+# デバッグ
 import pdb
 
 
-
 # 検索用のクラス(バリデーションのため)
-class CheckSearchValidation():
+class SearchParams(object):
+    
+    # パラメータデータ格納
+    params = {
+            'ek' : '000539110', # 目黒駅
+            'cb' : '0.0',       # 下限なし
+            'ct' : '9999999',    # 上限なし
+            'et' : '9999999',    # 駅徒歩していなし
+            'cn' : '9999999',    # 築年数制限なし
+            'mb' : '0',         # 専有面積　下限なし
+            'mt' : '9999999',    # 専有面積　上限なし
+            'shkr1' : '03',     # ?
+            'shkr2' : '03',     # ?
+            'shkr3' : '03',     # ?
+            'shkr4' : '03',     # ?
+            'fw2' : '',         # ?
+            'rn' : '0005',
+            'srch_navi' : '1',
+            }
+
 
     def __init__(self, request):
-        self.message = {}
-        self.stations = request['stations']
+        self.make_params(request)
+        
+    
+    # リクエスト情報からparamsを変更
+    def make_params(self, request):
+        # 送信されたパラメータのみ変更
+        for param_name in request:
+            # csrfトークンは処理なし
+            if param_name == 'csrfmiddlewaretoken':
+                continue
+            self.params[param_name] = request.getlist(param_name)
 
 
-    def isValid(self):
+    # スーモに使用するURLを取得する
+    def get_suumo_params(self):
+        # 文字列連結用
+        stringBuilder = []
 
-        self.__check()
+        # クエリを作成
+        for key, vals in self.params.items():
+            if type(vals) is list:
+                for val in vals:
+                    stringBuilder.append(key + "=" + val)
+            else:
+                stringBuilder.append(key + "=" + vals)
 
-        if not self.message:
-            return True
-        else:
-            return False
-
-    def __check(self):
-        print(self.stations)
-
-class SearchForm(forms.Form):
-    station = {}
-
-    def __init__(self):
-        routes = Route.objects.all()
-        for route in routes:
-            SearchForm.station = forms.ModelChoiceField(route.station_set.all(), label='駅', widget=forms.CheckboxSelectMultiple)
-        super().__init__()
-
-        # pdb.set_trace()
+        return "https://suumo.jp/jj/chintai/ichiran/FR301FC001/?" + "&".join(stringBuilder)
