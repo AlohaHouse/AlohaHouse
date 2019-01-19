@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+
+{% load static %}
+{% block extracss %}
+  <link rel="stylesheet" href="{% static 'AlohaHouse/css/article/search_routes.css' %}" />
+{% endblock %} 
+
+
+{% block content %}
+
+<div class="error-messages">
+  <ul>
+      {% if message %}
+      <li>{{ message }}</li>
+      {% endif %}
+  </ul>
+</div>
+
+<form action="{% url 'article:search_routes' %}" method="post">
+  <!-- 路線の企業 -->
+  {% for company in company_list %}
+  <section class="company-content">
+    <h2 class="company-name">{{ company }}</h2>
+
+    <!-- 路線 -->
+    {% for route in company.route_set.all %}
+    
+    <input name="routes" 
+           type="checkbox" 
+           id="route-{{ route.id }}" 
+           value="{{ route.id }}" 
+           style="display: none;" />
+    <label for="route-{{ route.id }}" 
+           class="search-route" 
+           style="background-color:{{ route.color_code }};">{{ route }}</label>
+
+    {% endfor %}
+  </section>
+  {% endfor %}
+  {% csrf_token %}
+
+  <button type="submit">この条件で検索</button>
+</form>
+
+{% endblock %}

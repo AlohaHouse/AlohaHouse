@@ -143,3 +143,6 @@ LOGOUT_REDIRECT_URL = 'accounts:login'
 
 # デバッグ用
 INTERNAL_IPS = ['127.0.0.1']
+
+# セッションに使用
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'

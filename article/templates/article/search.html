@@ -1,24 +1,47 @@
 {% extends 'base.html' %}
 
+
+{% load static %}
+{% block extracss %}
+  <link rel="stylesheet" href="{% static 'AlohaHouse/css/article/search.css' %}" />
+{% endblock %} 
+
+
 {% block content %}
-<form action="{% url 'article:search' %}" method="get">
-  <!-- {% for company in company_list %}
-  <div>
-    <h2>{{ company }}</h2>
 
-    {% for route in company.route_set.all %}
-    <p style="background-color:{{ route.color_code }};">{{ route }}</p>
+<!-- エラーメッセージ -->
+<div class="error-messages">
+</div>
 
-      {% for station in route.station_set.all %}
-      <input name="stations" type="checkbox" value="{{ station.code }}">{{ station }}</input>
-      {% endfor %}
+<form action="{% url 'article:search' %}" method="post">
+    <!-- エリア（東京） -->
+    <input type="hidden" name="ar" value="030" />
+    <!-- 謎 -->
+    <input type="hidden" name="bs" value="040" />
+    <!-- 謎 -->
+    <input type="hidden" name="ra" value="013" />
+    
+    <!-- 路線の企業 -->
+    {% for key, route in route_list.items %}
+    <section class="company-content">
+        <h2 class="route-name">{{ route }}</h2>
 
+        <!-- 路線 -->
+        {% for station in route.station_set.all %}
+        
+        <input name="ek" 
+            type="checkbox" 
+            id="station-{{ station.id }}" 
+            value="{{ station.code }}" />
+        <label for="station-{{ station.id }}" 
+            class="search-station" >{{ station }}</label>
+
+        {% endfor %}
+    </section>
     {% endfor %}
-  </div>
-  {% endfor %} -->
-  {{ form.station. }}
-  {% csrf_token %}
-  <button type="submit">検索</button>
+    {% csrf_token %}
+
+    <button type="submit">この条件で検索</button>
 </form>
 
 {% endblock %}

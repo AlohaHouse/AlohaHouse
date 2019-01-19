@@ -1,0 +1,25 @@
+.search-route {
+    border-radius: 5px;
+    padding: 5px;
+    margin-right: 10px;
+    font-size: 25px;
+    border: 2px solid #a9a9a9;
+    color: white;
+    cursor: pointer;
+}
+
+.search-route:hover {
+    box-shadow: 10px red;
+}
+
+input[type=checkbox]:checked + .search-route {
+    border: 2px solid red;
+}
+  
+.company-content {
+    margin-bottom: 20px;
+}
+
+.company-name {
+    font-size: 50px;
+}

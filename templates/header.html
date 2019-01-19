@@ -1,5 +1,6 @@
 <a href="{% url 'accounts:signup' %}">新規登録</a>
 {% if user.is_authenticated %}
+<a href="{% url 'article:search_routes' %}">物件検索</a>
 <a href="{% url 'accounts:signup' %}">マイページ</a>
 <a href="{% url 'accounts:logout' %}">ログアウト</a>
 {% else %}
