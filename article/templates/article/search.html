@@ -20,7 +20,7 @@
     <input type="hidden" name="bs" value="040" />
     <!-- 謎 -->
     <input type="hidden" name="ra" value="013" />
-    
+
     <!-- 路線の企業 -->
     {% for key, route in route_list.items %}
     <section class="company-content">
@@ -29,16 +29,65 @@
         <!-- 路線 -->
         {% for station in route.station_set.all %}
         
-        <input name="ek" 
-            type="checkbox" 
-            id="station-{{ station.id }}" 
-            value="{{ station.code }}" />
-        <label for="station-{{ station.id }}" 
-            class="search-station" >{{ station }}</label>
+        <!-- 路線名情報 -->
+        <label for="station-{{ station.id }}" class="search-station" >
+            <input name="ek" type="checkbox" id="station-{{ station.id }}" value="{{ station.code }}" />
+            {{ station }}
+        </label>
 
         {% endfor %}
     </section>
     {% endfor %}
+
+    <!-- その他の条件一覧表示 -->
+    {% for group in condition_group_list %}
+    <section class="condition-content">
+        <!-- 条件のグループ名称 -->
+        <h2 class="condition-name">{{ group.name }}</h2>
+        {% for condition in group.condition_set.all %}
+            {% if condition.input_type is 11 %}
+            <!-- selectboxの条件(左) -->
+                <div>
+                    <select name="{{ condition.input_name }}">
+                        {% for val in condition.conditionvalue_set.all|dictsort:"sort"%}
+                        <option value="{{ val.code }}" {{ val.is_default | yesno:'checked,' }}>
+                            {{ val.name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+            {% elif condition.input_type is 19 %}
+            <!-- selectboxの条件(右) -->
+                    〜
+                    <select name="{{ condition.input_name }}">
+                        {% for val in condition.conditionvalue_set.all|dictsort:"sort" %}
+                        <option value="{{ val.code }}" {{ val.is_default | yesno:'checked,' }}>
+                            {{ val.name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            {% elif condition.input_type is 20 %}  
+            <!-- select box -->
+            
+            {% elif condition.input_type is 30 %}
+            <!-- checkbox -->
+                {% for val in condition.conditionvalue_set.all|dictsort:"sort" %}
+                <input type="checkbox" value="{{ val.code }}" name="{{ val.input_name }}" />
+                <label for="{{ val.input_name }}">{{ val.name }}</label>
+                {% endfor %}
+            {% elif condition.input_type is 40 %}
+            <!-- radio -->
+                {% for val in condition.conditionvalue_set.all|dictsort:"sort" %}
+                <input type="radio" value="{{ val.code }}" name="{{ val.input_name }}" {{ val.is_default | yesno:'checked,' }}>
+                <label for="{{ val.input_name }}">{{ val.name }}</label>
+                {% endfor %}
+            
+            {% endif %}
+        {% endfor %}
+    </section>
+    {% endfor %}
+
+    <!-- 送信用のトークン -->
     {% csrf_token %}
 
     <button type="submit">この条件で検索</button>
