@@ -57,6 +57,7 @@ class Condition(models.Model):
     name = models.CharField('条件名', max_length=20)
     # HTML表示のinputのtype属性
     input_type = models.IntegerField('inputのtype属性', choices=INPUT_TYPE)
+    input_name = models.CharField('inputのname属性', max_length=10)
     sort = models.IntegerField('ソート順')
     is_active = models.BooleanField('使用中', default=True)
     condition_group = models.ForeignKey(
@@ -72,8 +73,8 @@ class Condition(models.Model):
 # こだわり条件の値
 class ConditionValue(models.Model):
     name = models.CharField('値の名称', max_length=20)
-    input_name = models.CharField('inputのname属性', max_length=10)
     code = models.code = models.CharField('コード', max_length=20)
+    input_name = models.CharField('inputのname属性', max_length=10)
     is_default = models.IntegerField('デフォルト設定', default=0)
     sort = models.IntegerField('ソート順')
     condition = models.ForeignKey(

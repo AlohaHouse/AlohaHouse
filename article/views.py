@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import TemplateView, ListView
 from .forms import SearchParams
-from masterdata.models import Company, Route
+from masterdata.models import Company, Route, ConditionsGroup
 from django.views import View
 from bs4 import BeautifulSoup
 from collections import Counter
@@ -31,7 +31,6 @@ class SearchRoutesView(View):
         else:
             context = self.get_context_data()
             # メッセージ設定
-            context['messages'] = "路線を選択してください"
             return render(request, self.template_name, context)
 
 
@@ -61,7 +60,6 @@ class SearchView(View):
 
     def post(self, request, *args, **kwargs):
         # 情報格納変数
-        model = {}
         if 'ek' in request.POST:
             search_data = SearchParams(request.POST)
             # 駅を選択しているか確認
@@ -70,7 +68,6 @@ class SearchView(View):
             return redirect(self.success_url)
         else:
             context = self.get_context_data(request)
-            context['messages'] = model['messages']
             return render(request, self.template_name, context)
    
     
@@ -84,6 +81,7 @@ class SearchView(View):
         route_id_list = request.session['routes'] 
         # 選択された路線を取得
         context['route_list'] = Route.objects.in_bulk(id_list=route_id_list, field_name='pk')
+        context['condition_group_list'] = ConditionsGroup.objects.filter(is_active=True)
         return context
 
 
@@ -101,6 +99,7 @@ class ResultView(TemplateView):
     def get_context_data(self,request, **kwargs):
         # アクセスするURL（実際はセッションから取得）
         data = request.session['search_data']
+        # suumoのURLを取得
         url = data.get_suumo_params()
         # url = "https://suumo.jp/jj/chintai/ichiran/FR301FC001/?ar=030&bs=040&ra=013&cb=0.0&ct=9999999&et=9999999&cn=9999999&mb=0&mt=9999999&shkr1=03&shkr2=03&shkr3=03&shkr4=03&fw2=&ek=000525620&rn=0005"
 

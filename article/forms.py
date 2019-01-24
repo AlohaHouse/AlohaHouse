@@ -10,12 +10,6 @@ class SearchParams(object):
     
     # パラメータデータ格納
     params = {
-            'ek' : '000539110', # 目黒駅
-            'cb' : '0.0',       # 下限なし
-            'ct' : '9999999',    # 上限なし
-            'et' : '9999999',    # 駅徒歩していなし
-            'cn' : '9999999',    # 築年数制限なし
-            'mb' : '0',         # 専有面積　下限なし
             'mt' : '9999999',    # 専有面積　上限なし
             'shkr1' : '03',     # ?
             'shkr2' : '03',     # ?
@@ -54,4 +48,5 @@ class SearchParams(object):
             else:
                 stringBuilder.append(key + "=" + vals)
 
+        print("&".join(stringBuilder))
         return "https://suumo.jp/jj/chintai/ichiran/FR301FC001/?" + "&".join(stringBuilder)
