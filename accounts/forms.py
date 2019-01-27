@@ -23,6 +23,10 @@ class SignUpForm(UserCreationForm):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():
             field.widget.attrs['class'] = 'form-control'
+        self.fields.get('username').widget.attrs['placeholder'] ='Username'
+        self.fields.get('email').widget.attrs['placeholder'] ='Email'
+        self.fields.get('password1').widget.attrs['placeholder'] ='Password'
+        self.fields.get('password2').widget.attrs['placeholder'] ='Confirm Password'
 
 
 class LoginForm(AuthenticationForm):
