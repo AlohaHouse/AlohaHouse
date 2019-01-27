@@ -9,26 +9,40 @@
     <div class="article_name"><b>{{ article_names|lookup:i }}</b></div>
     <div class="address">{{ addresses|lookup:i }}</div>
     <div class="article_image"><img src='{{ article_images|lookup:i }}' alt="物件画像" /></div>
-  
+    <div class="transportation">
+      {% for j in transportation_all|range2:i %}
+      <div>{% lookup2 transportation_all i j %}<br></div>
+      {% endfor %}
+    </div>
+    <div class="years">
+      {{ years|lookup:i }}
+    </div>
+    <div class="stories">
+        {{ stories|lookup:i }}
+    </div>
     <table class="table">
       <thead>
         <!-- 詳細は行をクリックすることによって遷移できる -->
         <tr>
           <!-- 間取り画像の上か下に1LDKなどを表示する -->
-          <th>間取り</th>
+          <th>間取り/専有面積</th>
           <th>階数</th>
-          <th>賃料/管理費</th>
+          <th>賃料</th>
+          <th>管理費</th>
           <th>敷金/礼金</th>
-          <th>専有面積</th>
         </tr>
         <!-- 変更 -->
         {% for j in article_level_all|range2:i %}
         <tr>
-          <td></td>
+          <td>{% lookup2 floor_plan_all i j %}
+          <div style="width:200px; height:auto; ">
+            <img src='{% lookup2 floor_picture_all i j %}' alt="間取画像" width="100%" height="auto" />
+          </div>
+            {% lookup2 article_area_all i j %}m<sup>2</sup></td>
           <td>{% lookup2 article_level_all i j %}</td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td>{% lookup2 article_rent_all i j %}</td>
+          <td>{% lookup2 article_administration_all i j %}</td>
+          <td>{% lookup2 article_deposit_all i j %} / {% lookup2 article_gratuity_all i j %}</td>
         </tr>
         {% endfor %}
         <!-- 変更終 -->
