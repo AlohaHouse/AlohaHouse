@@ -3,28 +3,28 @@
     <img src="{% static 'AlohaHouse/svg/logo.svg'%}" style="max-height:500px"/> 
     
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'article:search_routes' %}">物件検索</a>
-        </li>
-        {% if user.is_authenticated %}
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'accounts:signup' %}">お気に入り</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'accounts:signup' %}">検索履歴</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'accounts:logout' %}">ログアウト</a>
-        </li>
-        {% else %}
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'accounts:signup' %}">新規登録</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'accounts:login' %}">ログイン</a>
-        </li>
-        {% endif %}
+        <ul class="navbar-nav" style="float:right;"">
+            <li class="nav-item" style="float:left;">
+                <a class="nav-link" href="{% url 'article:search_routes' %}">物件検索</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'accounts:signup' %}">お気に入り</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'accounts:signup' %}">検索履歴</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'accounts:logout' %}">ログアウト</a>
+            </li>
+            {% else %}
+            <li class="nav-item" style="float:left;">
+                <a class="nav-link" href="{% url 'accounts:signup' %}">新規登録</a>
+            </li>
+            <li class="nav-item" style="float:left;">
+                <a class="nav-link" href="{% url 'accounts:login' %}">ログイン</a>
+            </li>
+            {% endif %}
         </ul>
     </div>
 </nav>
