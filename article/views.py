@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import TemplateView, ListView
 from .forms import SearchParams
 from masterdata.models import Company, Route, ConditionsGroup
+from .models import Favorite, History
 from django.views import View
 from bs4 import BeautifulSoup
 from collections import Counter
@@ -64,6 +65,11 @@ class SearchView(View):
             search_data = SearchParams(request.POST)
             # 駅を選択しているか確認
             request.session['search_data'] = search_data
+            # 検索履歴を保存
+            history = History()
+            history.url = search_data.get_suumo_params()
+            history.user = request.user
+            history.save()
             # 検索結果一覧画面へ
             return redirect(self.success_url)
         else:
