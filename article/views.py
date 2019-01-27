@@ -299,3 +299,24 @@ class ResultView(TemplateView):
         context["years"] = years
         context["stories"] = stories
         return context
+
+
+class DetailView(TemplateView):
+    template_name = 'article/detail.html'
+
+
+    def get(self, request, **kwargs):
+        context = {}
+        context['article_url'] = request.GET.get('url')
+        return render(request, self.template_name, context)
+
+    
+    def post(self, request, **kwargs):
+        favorite = Favorite()
+        favorite.name = request.POST.get('name')
+        favorite.url = request.POST.get('url')
+        favorite.save()
+        
+
+
+        
