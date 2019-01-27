@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extracss %}
+    <link rel="stylesheet" href="{% static 'AlohaHouse/css/article/detail.css' %}" />
+{% endblock %} 
+
+{% block content %}
+
+<!-- お気に入り登録 -->
+<form action="{% url 'article:detail' %}" method="post">
+    <!-- <input type="hidden" name="name" value="" /> -->
+    <input type="hidden" name="url" value="{{ article_url }}" />
+    <button type="submit">お気に入り</button>
+</form>
+
+<iframe src="https://suumo.jp/{{article_url}}" class="detail-iframe">
+</iframe>
+
+{% endblock %}
+
+{% block extrajs %}
+$('#ajax-add-post').on('submit', e => {
+    // デフォルトのイベントをキャンセルし、ページ遷移しないように!
+    e.preventDefault();
+
+    var iframe = $('.detail-iframe').contents();
+
+    $.ajax({
+        'url': '{% url "app:detail" %}',
+        'type': 'POST',
+        'data': {
+            'name': iframe.find('.section_h1-header-title').text(),  // 物件タイトル
+        },
+        'dataType': 'json'
+    }).done( response => {
+        // 成功したら
+    });
+
+});
+{% endblock %}
+
+
