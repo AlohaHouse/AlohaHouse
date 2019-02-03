@@ -2,6 +2,12 @@
 
 
 {% block content %}
+
+{% for field, errors in form.errors.items %}
+    {% for error in errors %}
+        <p class="alert alert-danger">{{ error }}</p>
+    {% endfor %}
+{% endfor %}
 <div class="container">
     <section>
         <form class="form-horizontal" role="form" method="post">
@@ -57,7 +63,7 @@
                     <div class="form-group has-danger">
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon" style="width: 2.6rem"><i class="fas fa-key"></i></div>
-                            <input type="password" name="password" class="form-control" id="password" placeholder="Password" required="">
+                            <input type="password" name="password1" class="form-control" id="password" placeholder="Password" required="">
                         </div>
                     </div>
                 </div>
@@ -78,7 +84,7 @@
                             <div class="input-group-addon" style="width: 2.6rem">
                                 <i class="fas fa-redo"></i>
                             </div>
-                            <input type="password" name="password-confirmation" class="form-control" id="password-confirm" placeholder="Confirm Password" required="">
+                            <input type="password" name="password2" class="form-control" id="password-confirm" placeholder="Confirm Password" required="">
                         </div>
                     </div>
                 </div>
@@ -87,6 +93,7 @@
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
                     <button type="submit" class="btn btn-success"><i class="fa fa-user-plus"></i> Register</button>
+                    {% csrf_token %}
                 </div>
             </div>
         </form>
