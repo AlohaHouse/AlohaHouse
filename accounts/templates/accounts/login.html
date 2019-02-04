@@ -1,23 +1,65 @@
 {% extends 'base.html' %}
 
-{% block content %}
+{% load widget_tweaks %}
 
+{% block content %}
 <form action="" method="POST">
-    <div class="col-md-6 offset-md-3">
-        <div class="card">
-            <div class="card-body">
-                {{ form.non_field_errors }}
-                {% for field in form %}
-                    {{ field }}
-                    {{ field.errors }}
-                    <hr>
-                {% endfor %}
-                <button type="submit" class="btn btn-success btn-lg btn-block" >ログイン</button>
-                <input type="hidden" name="next" value="{{ next }}" />
-                {% csrf_token %}
-            </div>
-        </div>
+    <div class="card-box">
+        {{ form.non_field_errors }}
+        {{ form.username|add_class:"input-login" }}
+        {{ form.password|add_class:"input-login" }}
+        <button type="submit" class="login-button" >Login</button>
+        <input type="hidden" name="next" value="{{ next }}" />
+        {% csrf_token %}    
     </div>
 </form>
+
+<style type="text/css">
+body {
+background-image: url("/static/AlohaHouse/img/login_background.jpg");
+background-size: cover;
+background-position: center center; 
+background-attachment: fixed;
+}
+
+.card-box{
+position: absolute;
+top: 0;
+right: 0;
+bottom: 0;
+left: 0;
+margin: auto;
+width: 30vw;
+height: 3.2rem;
+}
+
+.input-login {
+    height: 5vh;
+    opacity: 0.5;
+    background-color: gray;
+    margin-bottom: 5vh;
+    border: none;
+    color: white;
+    border-radius: 130px;
+}
+
+.input-login::-webkit-input-placeholder {
+	color: white;
+}
+
+.input-login:focus {
+    background: rgb(109, 109, 109);
+    color: white;
+}
+
+.login-button {
+    width: 30vw;
+    background-color: rgb(247,43,90);
+    color: white;
+    border: none;
+    height: 5vh;
+    border-radius: 130px;
+}
+</style>
 
 {% endblock %}

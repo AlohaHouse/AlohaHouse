@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # デバッグよう
     'debug_toolbar',
+    # class指定など
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
