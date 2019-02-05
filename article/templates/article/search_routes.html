@@ -17,30 +17,67 @@
   </ul>
 </div>
 
-<form action="{% url 'article:search_routes' %}" method="post">
-  <!-- 路線の企業 -->
-  {% for company in company_list %}
-  <section class="company-content">
-    <h2 class="company-name">{{ company }}</h2>
+<div class="row">
 
-    <!-- 路線 -->
-    {% for route in company.route_set.all %}
-    
-    <input name="routes" 
-           type="checkbox" 
-           id="route-{{ route.id }}" 
-           value="{{ route.id }}" 
-           style="display: none;" />
-    <label for="route-{{ route.id }}" 
-           class="search-route" 
-           style="background-color:{{ route.color_code }};">{{ route }}</label>
+  <!-- 左側 -->
+  <div class="col-md-6">
+    <form action="{% url 'article:search_routes' %}" id="routes-form" method="post">
+        <!-- 路線の企業 -->
+        {% for company in company_list %}
+        <section class="company-content">
+          <h2 class="company-name">{{ company }}</h2>
+      
+          <!-- 路線 -->
+          {% for route in company.route_set.all %}
+          
+          <input name="routes" 
+                  type="checkbox" 
+                  id="route-{{ route.id }}" 
+                  value="{{ route.id }}" 
+                  style="display: none;" />
+          <label for="route-{{ route.id }}" 
+                  class="search-route" 
+                  style="border: 10px solid {{ route.color_code }};">
+              {{ route.eng_name }}<span style="background-color: {{ route.color_code }}" class="routes-form-balloon">{{ route }}</span>
+          </label>
+      
+          {% endfor %}
+        </section>
+        {% endfor %}
+        {% csrf_token %}
+      </form>
+  </div>
 
-    {% endfor %}
-  </section>
-  {% endfor %}
-  {% csrf_token %}
+  <!-- 右側 -->
+  <div class="col-md-6">
+    <div class="routes-box">
+        <ul>
+          {% for company in company_list %}
+            <!-- 路線 -->
+            {% for route in company.route_set.all %}
 
-  <button type="submit">この条件で検索</button>
-</form>
+            <li>
+              <span for="route-{{ route.id }}" class="search-route {{ route.eng_name }}" 
+                      style="border: 10px solid {{ route.color_code }};">
+                  {{ route.eng_name }}
+              </span>
+              <span>
+                {{ route }}
+              </span>
+              <span class="X-mark float-right">
+                ❌
+              </span>
+            </li>
+            {% endfor %}
+          {% endfor %}
+        </ul>
+    </div>
+    <button id="submit-btn" class="btn-primary">この条件で検索</button>
+  </div>
+</div>
 
+{% endblock %}
+
+{% block extrajs %}
+  <script ype="text/javascript" src="{% static 'AlohaHouse/js/search_routes.js' %}"></script>
 {% endblock %}

@@ -1,19 +1,42 @@
 .search-route {
-    border-radius: 5px;
-    padding: 5px;
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    line-height: 200%;
+    color: black;
+    border-radius: 50%;
+    font-weight: bold;
     margin-right: 10px;
     font-size: 25px;
-    border: 2px solid #a9a9a9;
-    color: white;
     cursor: pointer;
-}
-
-.search-route:hover {
-    box-shadow: 10px red;
+    display: inline-block;
 }
 
 input[type=checkbox]:checked + .search-route {
-    border: 2px solid red;
+    display: none;
+}
+
+input[type=checkbox]:checked + .search-route {
+    display: none;
+}
+
+.routes-box {
+    overflow: scroll;
+}
+
+.X-mark {
+    font-size: 30px;
+}
+
+.routes-box ul  {
+    list-style: none;
+    padding: 7px;
+    
+}
+
+.routes-box ul li {
+    list-style: none;
+    margin-top: 6px;
 }
   
 .company-content {
@@ -22,4 +45,87 @@ input[type=checkbox]:checked + .search-route {
 
 .company-name {
     font-size: 50px;
+}
+
+.routes-box {
+    height: 70%;
+    margin: 25px;
+    border: solid 2px black;
+}
+
+#submit-btn {
+    width: 90%;
+    height: 50px;
+    margin: 0 5%;
+    border-radius: 5px;
+}
+
+/* ホバーしたらバルーンで表示 */
+.search-route{
+    /*リンクテキストのスタイルです*/
+    text-decoration: none;
+    position: relative;
+}
+
+.routes-form-balloon {
+    /*バルーンのスタイルです*/
+
+    /*表示位置を指定します*/
+    position: absolute;
+    top: -40px;
+    left: -20px;
+
+    /*非表示にしておきます*/
+    display: none;
+    opacity: 0;
+
+    /*表示スタイルを指定します*/
+    padding: 2px;
+    border-radius: 5px;
+    color: white;
+    background-color: blue;
+    line-height: 35px;
+    width: 100px;
+    height: 35px;
+    font-size: 15px;
+    /*影をつけて見栄えを良くします*/
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8),
+        inset 1px 0 0 rgba(255, 255, 255, 0.3),
+        inset -1px 0 0 rgba(255, 255, 255, 0.3),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.2);
+
+    /*アニメーションを指定します*/
+    animation-duration: 0.3s;
+    animation-name: show-balloon;
+}
+
+.search-route:hover .routes-form-balloon {
+/*マウスホバー時のバルーンのスタイルです*/
+
+/*表示するようにします*/
+    display: inline-block;
+    opacity: 1;
+    top: -40px;
+}
+
+
+
+@keyframes show-balloon {
+/*アニメーションを定義します*/
+    0% {
+        display: none;
+        opacity: 0;
+        top: -30px;
+    }
+    1% {
+        display: inline-block;
+        opacity: 0;
+        top: -30px;
+    }
+    100% {
+        display: inline-block;
+        opacity: 1;
+        top: -40px;
+    }
 }
