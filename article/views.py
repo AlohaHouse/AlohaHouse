@@ -6,9 +6,11 @@ from .models import Favorite, History
 from django.views import View
 from bs4 import BeautifulSoup
 from collections import Counter
+from django.http import HttpResponse
 
 import pdb
 import urllib
+import json
 
 
 """路線選択フォーム"""
@@ -109,6 +111,7 @@ class ResultView(TemplateView):
         url = data.get_suumo_params()
         # url = "https://suumo.jp/jj/chintai/ichiran/FR301FC001/?ar=030&bs=040&ra=013&cb=0.0&ct=9999999&et=9999999&cn=9999999&mb=0&mt=9999999&shkr1=03&shkr2=03&shkr3=03&shkr4=03&fw2=&ek=000525620&rn=0005"
 
+        print(url)
         # URLにアクセスする htmlが返ってくる → <html><head><title></title></head><body....
         html = urllib.request.urlopen(url=url)
 
@@ -312,10 +315,22 @@ class DetailView(TemplateView):
 
     
     def post(self, request, **kwargs):
+        url = "https://suumo.jp/" + request.POST.get('url')
+        # URLにアクセスする htmlが返ってくる → <html><head><title></title></head><body....
+        html = urllib.request.urlopen(url=url)
+
+        # htmlをBeautifulSoupで扱う
+        soup = BeautifulSoup(html, "html.parser")
+        name = soup.find('h1', class_="section_h1-header-title").text
+
         favorite = Favorite()
-        favorite.name = request.POST.get('name')
+        favorite.name = name
         favorite.url = request.POST.get('url')
+        favorite.user = request.user
         favorite.save()
+
+        response = json.dumps({'status': 1})
+        return HttpResponse(response)
         
 
 
