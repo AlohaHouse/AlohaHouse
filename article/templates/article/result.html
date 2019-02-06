@@ -35,9 +35,8 @@
         {% for j in article_level_all|range2:i %}
         <tr>
           <td>{% lookup2 floor_plan_all i j %}
-          <div style="width:200px; height:auto; ">
-            <img src='{% lookup2 floor_picture_all i j %}' alt="間取画像" width="100%" height="auto" />
-          </div>
+            <div style="width:200px; height:200px; background-image: url('{% lookup2 floor_picture_all i j %}')">
+            </div>
             {% lookup2 article_area_all i j %}m<sup>2</sup></td>
           <td>{% lookup2 article_level_all i j %}</td>
           <td>{% lookup2 article_rent_all i j %}</td>
