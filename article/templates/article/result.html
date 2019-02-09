@@ -31,20 +31,23 @@
           <th>管理費</th>
           <th>敷金/礼金</th>
         </tr>
-        <!-- 変更 -->
         {% for j in article_level_all|range2:i %}
-        <tr>
-          <td>{% lookup2 floor_plan_all i j %}
-            <div style="width:200px; height:200px; background-image: url('{% lookup2 floor_picture_all i j %}')">
+        <form action="{% url 'article:detail' %}" method="get">
+          <tr>
+            <td>{% lookup2 floor_plan_all i j %}
+              <div style="width:200px; height:200px; background-image: url('{% lookup2 floor_picture_all i j %}')">
+              </div>
             </div>
-            {% lookup2 article_area_all i j %}m<sup>2</sup></td>
-          <td>{% lookup2 article_level_all i j %}</td>
-          <td>{% lookup2 article_rent_all i j %}</td>
-          <td>{% lookup2 article_administration_all i j %}</td>
-          <td>{% lookup2 article_deposit_all i j %} / {% lookup2 article_gratuity_all i j %}</td>
-        </tr>
+              {% lookup2 article_area_all i j %}m<sup>2</sup></td>
+            <td>{% lookup2 article_level_all i j %}</td>
+            <td>{% lookup2 article_rent_all i j %}</td>
+            <td>{% lookup2 article_administration_all i j %}</td>
+            <td>{% lookup2 article_deposit_all i j %} / {% lookup2 article_gratuity_all i j %}</td>
+          </tr>
+          <input type="hidden" name="url" value="{% lookup2 detail_url_all i j %}" >
+          <input type="submit" value="送信">
+        </form>
         {% endfor %}
-        <!-- 変更終 -->
       </thead>
       <tbody>
       </tbody>

@@ -213,6 +213,20 @@ class ResultView(TemplateView):
             article_rent_all.append(article_rents)
             article_rents = [] #1物件の賃料全てを取得したので初期化
 
+        #詳細URL取得（取得後2次元配列で保持）
+        detail_url_all = [] #全ての詳細URL全てを格納(2次元配列)
+        detail_urls = [] #1物件の詳細URL全てを格納
+        for cassetteitem in cassetteitems:
+            arg1 = cassetteitem.find("div", class_="cassetteitem-item")
+            arg2 = cassetteitem.find_all("tbody")
+            for arg3 in arg2:
+                arg4 = arg3.select_one("tr td:nth-of-type(9)") #nth-of-typeで何番目の要素なのか指定
+                arg5 = arg4.find("a")
+                href = arg5.get('href')
+                detail_urls.append(href)
+            detail_url_all.append(detail_urls)
+            detail_urls = [] #1物件の詳細URL全てを取得したので初期化
+
         #建物の管理費取得（取得後2次元配列で保持）
         article_administration_all = [] #全ての物件の階数全てを格納(2次元配列)
         article_administrations = [] #１物件の階数全てを格納
@@ -299,6 +313,7 @@ class ResultView(TemplateView):
         context["article_deposit_all"] = article_deposit_all
         context["article_gratuity_all"] = article_gratuity_all
         context["transportation_all"] = transportation_all
+        context["detail_url_all"] = detail_url_all
         context["years"] = years
         context["stories"] = stories
         return context
