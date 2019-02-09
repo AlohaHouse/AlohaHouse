@@ -4,7 +4,7 @@
 
 {% block content %}
 <form action="" method="POST">
-    <div class="card-box">
+    <div class="login-box">
         {{ form.non_field_errors }}
         {{ form.username|add_class:"input-login" }}
         {{ form.password|add_class:"input-login" }}
@@ -22,9 +22,9 @@ background-position: center center;
 background-attachment: fixed;
 }
 
-.card-box{
+.login-box{
 position: absolute;
-top: 0;
+top: -22vh;
 right: 0;
 bottom: 0;
 left: 0;
