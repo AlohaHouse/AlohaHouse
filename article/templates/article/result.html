@@ -35,8 +35,8 @@
         <form action="{% url 'article:detail' %}" method="get">
           <tr>
             <td>{% lookup2 floor_plan_all i j %}
-            <div style="width:200px; height:auto; ">
-              <img src='{% lookup2 floor_picture_all i j %}' alt="間取画像" width="100%" height="auto" />
+              <div style="width:200px; height:200px; background-image: url('{% lookup2 floor_picture_all i j %}')">
+              </div>
             </div>
               {% lookup2 article_area_all i j %}m<sup>2</sup></td>
             <td>{% lookup2 article_level_all i j %}</td>
@@ -46,7 +46,6 @@
           </tr>
           <input type="hidden" name="url" value="{% lookup2 detail_url_all i j %}" >
           <input type="submit" value="送信">
-
         </form>
         {% endfor %}
       </thead>
