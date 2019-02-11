@@ -1,4 +1,21 @@
+
+@import url(https://fonts.googleapis.com/earlyaccess/notosansjp.css);
+/* フォントを指定したいところで */
+
+#routes-form {
+    position: relative;
+    width: 100vw;
+    height: calc(100vh - 99px);
+    overflow: hidden;
+}
+
+#route-conents ul li {
+    list-style: none;
+    z-index: 100;
+}
+
 .search-route {
+    position: absolute;
     width: 70px;
     height: 70px;
     text-align: center;
@@ -6,126 +23,167 @@
     color: black;
     border-radius: 50%;
     font-weight: bold;
-    margin-right: 10px;
     font-size: 25px;
     cursor: pointer;
     display: inline-block;
+    line-height: 200%;
 }
 
-input[type=checkbox]:checked + .search-route {
-    display: none;
+#trains {
+    position: relative
 }
 
-input[type=checkbox]:checked + .search-route {
-    display: none;
+.train-svg {
+    position: absolute;
+    margin-left: 10px;
+    /* margin-right: 100px; */
+    display: inline-block; 
+}
+.train-svg .text {
+    font-size: 44px;
+    vertical-align: middle;
+    font-weight: 300;
+    font-family: 'Noto Sans JP';
 }
 
-.routes-box {
-    overflow: scroll;
+.color-box {
+    position: absolute;
+    height: 500px;
+    width: 500px;
+    top: 170px;
+    left: 500px;
+    opacity: 0.3; 
+    transform: scale(0.1);
+    transition: 1s;
 }
 
-.X-mark {
+#station-form {
+    position: absolute;
+    height: 500px;
+    width: 500px;
+    top: 170px;
+    left: 500px;
+    transition: 1s;
     font-size: 30px;
 }
+#station-form section {
+    font-family: 'Noto Sans JP';
+    width: 400px;
+    margin-left: 140px;
+    padding-top: 15px;
+    font-weight: 300;
+}
 
-.routes-box ul  {
-    list-style: none;
-    padding: 7px;
+#station-form section label {
+    display: block;
+}
+
+.rotate-3 {
+    transform: scale(1) rotate(80deg);
+}
+
+.rotate-2 {
+    transform: scale(1) rotate(160deg);
+}
+
+.rotate-1 {
+    transform: scale(1) rotate(45deg);
+}
+
+.no-rotate {
+    transform: rotate(0) scale(0.1) !important;
+}
+
+@keyframes move{
     
+    0%{
+        transform:scale(1.0);
+    }
+    50%{
+        transform:scale(1.5);
+    }
+    100%{
+        transform:scale(1.5);
+        transform:translateX(200px);
+    }
 }
 
-.routes-box ul li {
-    list-style: none;
-    margin-top: 6px;
-}
-  
-.company-content {
-    margin-bottom: 20px;
-}
-
-.company-name {
-    font-size: 50px;
-}
-
-.routes-box {
-    height: 70%;
-    margin: 25px;
-    border: solid 2px black;
-}
-
-#submit-btn {
-    width: 90%;
-    height: 50px;
-    margin: 0 5%;
-    border-radius: 5px;
-}
-
-/* ホバーしたらバルーンで表示 */
-.search-route{
-    /*リンクテキストのスタイルです*/
-    text-decoration: none;
-    position: relative;
-}
-
-.routes-form-balloon {
-    /*バルーンのスタイルです*/
-
-    /*表示位置を指定します*/
+/* 送信ボタン */
+.submit-box {
+    width: 100%;
     position: absolute;
-    top: -40px;
-    left: -20px;
-
-    /*非表示にしておきます*/
+    bottom:0;
+    left:0;
+    transition: 1s;
     display: none;
-    opacity: 0;
-
-    /*表示スタイルを指定します*/
-    padding: 2px;
-    border-radius: 5px;
-    color: white;
-    background-color: blue;
-    line-height: 35px;
-    width: 100px;
-    height: 35px;
-    font-size: 15px;
-    /*影をつけて見栄えを良くします*/
-    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.5),
-        inset 0 1px 0 rgba(255, 255, 255, 0.8),
-        inset 1px 0 0 rgba(255, 255, 255, 0.3),
-        inset -1px 0 0 rgba(255, 255, 255, 0.3),
-        inset 0 -1px 0 rgba(255, 255, 255, 0.2);
-
-    /*アニメーションを指定します*/
-    animation-duration: 0.3s;
-    animation-name: show-balloon;
+    background-color: black;
+    opacity: 0.8;
+    z-index: 400;
 }
 
-.search-route:hover .routes-form-balloon {
-/*マウスホバー時のバルーンのスタイルです*/
+.more-btn {
+    padding: 10px;
+    width: 20%;
+    margin-left: 28%;
+}
 
-/*表示するようにします*/
-    display: inline-block;
-    opacity: 1;
-    top: -40px;
+.submit-btn {
+    padding: 10px;
+    width: 20%;
+    margin-left: 5%;
+}
+
+/* チェックボックス */
+#station-form input[type=checkbox] {
+	display: none;
+}
+#station-form label {
+	font-size: 1em;
+	line-height: 1;
+	position: relative;
+	display: block;
+	overflow: hidden;
+    padding-bottom: 5px;
+    padding-left: 20px;
+	cursor: pointer;
+	-webkit-transition: all 0.15s ease;
+	        transition: all 0.15s ease;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+#station-form .label-before {
+	top: 1em;
+	left: 1em;
+	width: 10px;
+	height: 10px;
+	content: '';
+    border: 0.2em solid #cccccc;
+    margin-right: 4px;
+}
+#station-form input:checked + label:before {
+	border-color: #da3c41;
+	background: #da3c41;
 }
 
 
+/* こだわり条件 */
+.condition-box {
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: 400;
+    background-color: white;
+}
 
-@keyframes show-balloon {
-/*アニメーションを定義します*/
-    0% {
-        display: none;
-        opacity: 0;
-        top: -30px;
-    }
-    1% {
-        display: inline-block;
-        opacity: 0;
-        top: -30px;
-    }
-    100% {
-        display: inline-block;
-        opacity: 1;
-        top: -40px;
-    }
+.condition {
+    width: 100vw;
+    height: calc(100vh - 99px);
+}
+
+.condition-table {
+    padding-top: 70px;
+    border-spacing : 2px;
 }

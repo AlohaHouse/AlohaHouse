@@ -17,47 +17,11 @@ import json
 class SearchRoutesView(View):
     # 路線一覧ページ
     template_name = 'article/search_routes.html'
-    # 駅選択画面
-    success_url = 'article:search'
-
-    def get(self, request, *args, **kwargs):
-        context = self.get_context_data()
-        return render(request, self.template_name, context)
-
-
-    def post(self, request, *args, **kwargs):
-        # 路線を選択している場合
-        if 'routes' in request.POST:
-            # セッションに路線情報を格納
-            request.session['routes'] = request.POST.getlist('routes')
-            return redirect(self.success_url)
-        else:
-            context = self.get_context_data()
-            # メッセージ設定
-            return render(request, self.template_name, context)
-
-
-    def get_context_data(self):
-        context = {}
-        # 路線会社一覧を格納
-        context['company_list'] = Company.objects.all()
-        return context
-
-
-"""駅選択フォーム"""
-class SearchView(View):
-    # 駅、こだわり選択画面
-    template_name = 'article/search.html'
     # 物件一覧画面
     success_url = 'article:result'
 
-
     def get(self, request, *args, **kwargs):
-        context = self.get_context_data(request)
-        # 路線情報が設定されていない場合
-        if not context:
-            # 路線選択画面へ
-            return redirect('article:search_routes')
+        context = self.get_context_data()
         return render(request, self.template_name, context)
 
 
@@ -77,20 +41,17 @@ class SearchView(View):
         else:
             context = self.get_context_data(request)
             return render(request, self.template_name, context)
-   
-    
 
-    def get_context_data(self, request):
+
+    def get_context_data(self):
         context = {}
-        # セッションに路線情報がない場合
-        if not 'routes' in request.session:
-            return None
-        # 路線のIDを取得
-        route_id_list = request.session['routes'] 
-        # 選択された路線を取得
-        context['route_list'] = Route.objects.in_bulk(id_list=route_id_list, field_name='pk')
+        # 路線会社一覧を格納
+        context['company_list'] = Company.objects.all()
+        # こだわりを取得
         context['condition_group_list'] = ConditionsGroup.objects.filter(is_active=True)
         return context
+        
+
 
 
 """検索結果コントローラ"""
