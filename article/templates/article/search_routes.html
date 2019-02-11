@@ -1,83 +1,203 @@
 {% extends 'base.html' %}
 
 
+<!-- CSS読み込み -->
+
 {% load static %}
 {% block extracss %}
   <link rel="stylesheet" href="{% static 'AlohaHouse/css/article/search_routes.css' %}" />
 {% endblock %} 
 
+<!-- body開始 -->
+{% block nocontent %}
 
-{% block content %}
+<!-- 対象フォーム -->
+<form action="{% url 'article:search_routes' %}" id="routes-form" method="post">
+  
+  <div id="route-conents" class="page" data-section-name="route">
+    <!-- 電車のアイコン -->
+    <div id="train-box">
+      <div style="width: 1000px;" id="trains">
+        <div class="train-svg">
+          <svg version="1.1" id="_x31_0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="width: 100px; height: 100px; opacity: 1; " xml:space="preserve">
+            <g>
+              <path class="st0" d="M511.004,183.437c0-5.421-2.234-10.281-5.739-13.864c-3.588-3.51-8.448-5.739-13.864-5.739H55.261
+                c-5.417,0-9.802,0.478-13.864,5.739C31.833,182.001,0.996,292.051,0.996,292.051v34.985h510.008V183.437z M473.549,201.207v91.245
+                h-48.054v-91.245H473.549z M406.848,292.452h-85.424v-91.245h85.424v90.848V292.452z M302.697,201.207v91.245h-85.428v-91.245
+                H302.697z M198.545,201.207v91.245h-85.428v-91.245H198.545z M94.389,292.452H51.311l-11.654-0.043
+                c10.514-36.801,21.743-72.801,28.436-91.202h26.295v91.124V292.452z" ></path>
+              <path class="st0" d="M59.245,389.927c-0.078,0.712-0.155,1.506-0.155,2.214c0,12.272,9.961,22.234,22.23,22.234
+                c12.354,0,22.315-9.962,22.315-22.234c0-0.716-0.078-1.51-0.16-2.226v-0.004h16.607l1.72,0.015
+                c-0.078,0.712-0.159,1.502-0.159,2.214c0,12.272,9.961,22.234,22.233,22.234c12.354,0,22.315-9.962,22.315-22.234
+                c0-0.716-0.082-1.514-0.159-2.23h164.218l18.428,0.019c-0.078,0.708-0.082,1.502-0.082,2.21c0,12.272,9.962,22.234,22.234,22.234
+                s22.234-9.962,22.234-22.234c0-0.716,0-1.514-0.078-2.23h16.533l1.712,0.015c-0.078,0.712-0.078,1.502-0.078,2.214
+                c0,12.272,9.961,22.234,22.234,22.234c12.272,0,22.233-9.962,22.233-22.234c0-0.716,0-1.514-0.078-2.23h55.132h0.168l0,0h0.163
+                v-46.938H0.996v46.938h52.471L59.245,389.927z"></path>
+              <path class="st0" d="M199.012,153.565c2.086,2.086,4.817,3.129,7.552,3.129c0.07,0,0.136-0.039,0.206-0.039
+                c0.07,0,0.136,0.039,0.206,0.039c2.735,0,5.466-1.043,7.552-3.129l49.152-49.152l-49.152-49.151c-2.14-2.14-4.957-3.14-7.758-3.086
+                c-2.806-0.054-5.618,0.946-7.758,3.086l-48.829,48.829l-0.214,0.21h0.004l-0.113,0.113L199.012,153.565z M206.77,131.114
+                l-26.7-26.701l26.7-26.7l26.701,26.7L206.77,131.114L206.77,131.114z" ></path>
+              <path class="st0" d="M355.731,153.565c2.086,2.086,4.818,3.129,7.553,3.129c0.07,0,0.136-0.039,0.206-0.039
+                c0.07,0,0.136,0.039,0.206,0.039c2.735,0,5.466-1.043,7.552-3.129l49.152-49.152l-49.152-49.151c-2.14-2.14-4.953-3.14-7.758-3.086
+                c-2.802-0.054-5.619,0.946-7.759,3.086l-48.934,48.934l-0.105,0.105l0,0l-0.113,0.113L355.731,153.565z M336.79,104.413
+                l26.701-26.7l26.7,26.7l-26.7,26.701L336.79,104.413z" ></path>
+            </g>
+          </svg>
+          <span class="text" ></span>
+          <svg version="1.1" id="_x31_0" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="width: 100px; height: 100px; opacity: 1; transform: scale(-1,1);" xml:space="preserve">
+            <g>
+              <path class="st0" d="M511.004,183.437c0-5.421-2.234-10.281-5.739-13.864c-3.588-3.51-8.448-5.739-13.864-5.739H55.261
+                c-5.417,0-9.802,0.478-13.864,5.739C31.833,182.001,0.996,292.051,0.996,292.051v34.985h510.008V183.437z M473.549,201.207v91.245
+                h-48.054v-91.245H473.549z M406.848,292.452h-85.424v-91.245h85.424v90.848V292.452z M302.697,201.207v91.245h-85.428v-91.245
+                H302.697z M198.545,201.207v91.245h-85.428v-91.245H198.545z M94.389,292.452H51.311l-11.654-0.043
+                c10.514-36.801,21.743-72.801,28.436-91.202h26.295v91.124V292.452z" ></path>
+              <path class="st0" d="M59.245,389.927c-0.078,0.712-0.155,1.506-0.155,2.214c0,12.272,9.961,22.234,22.23,22.234
+                c12.354,0,22.315-9.962,22.315-22.234c0-0.716-0.078-1.51-0.16-2.226v-0.004h16.607l1.72,0.015
+                c-0.078,0.712-0.159,1.502-0.159,2.214c0,12.272,9.961,22.234,22.233,22.234c12.354,0,22.315-9.962,22.315-22.234
+                c0-0.716-0.082-1.514-0.159-2.23h164.218l18.428,0.019c-0.078,0.708-0.082,1.502-0.082,2.21c0,12.272,9.962,22.234,22.234,22.234
+                s22.234-9.962,22.234-22.234c0-0.716,0-1.514-0.078-2.23h16.533l1.712,0.015c-0.078,0.712-0.078,1.502-0.078,2.214
+                c0,12.272,9.961,22.234,22.234,22.234c12.272,0,22.233-9.962,22.233-22.234c0-0.716,0-1.514-0.078-2.23h55.132h0.168l0,0h0.163
+                v-46.938H0.996v46.938h52.471L59.245,389.927z"></path>
+              <path class="st0" d="M199.012,153.565c2.086,2.086,4.817,3.129,7.552,3.129c0.07,0,0.136-0.039,0.206-0.039
+                c0.07,0,0.136,0.039,0.206,0.039c2.735,0,5.466-1.043,7.552-3.129l49.152-49.152l-49.152-49.151c-2.14-2.14-4.957-3.14-7.758-3.086
+                c-2.806-0.054-5.618,0.946-7.758,3.086l-48.829,48.829l-0.214,0.21h0.004l-0.113,0.113L199.012,153.565z M206.77,131.114
+                l-26.7-26.701l26.7-26.7l26.701,26.7L206.77,131.114L206.77,131.114z" ></path>
+              <path class="st0" d="M355.731,153.565c2.086,2.086,4.818,3.129,7.553,3.129c0.07,0,0.136-0.039,0.206-0.039
+                c0.07,0,0.136,0.039,0.206,0.039c2.735,0,5.466-1.043,7.552-3.129l49.152-49.152l-49.152-49.151c-2.14-2.14-4.953-3.14-7.758-3.086
+                c-2.802-0.054-5.619,0.946-7.759,3.086l-48.934,48.934l-0.105,0.105l0,0l-0.113,0.113L355.731,153.565z M336.79,104.413
+                l26.701-26.7l26.7,26.7l-26.7,26.701L336.79,104.413z" ></path>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
 
-<div class="error-messages">
-  <ul>
-      {% if message %}
-      <li>{{ message }}</li>
-      {% endif %}
-  </ul>
-</div>
-
-<div class="row">
-
-  <!-- 左側 -->
-  <div class="col-md-6">
-    <form action="{% url 'article:search_routes' %}" id="routes-form" method="post">
-        <!-- 路線の企業 -->
+    <!-- 路線リスト -->
+    <ul>
         {% for company in company_list %}
-        <section class="company-content">
-          <h2 class="company-name">{{ company }}</h2>
-      
           <!-- 路線 -->
           {% for route in company.route_set.all %}
-          
-          <input name="routes" 
-                  type="checkbox" 
-                  id="route-{{ route.id }}" 
-                  value="{{ route.id }}" 
-                  style="display: none;" />
-          <label for="route-{{ route.id }}" 
-                  class="search-route" 
-                  style="border: 10px solid {{ route.color_code }};">
-              {{ route.eng_name }}<span style="background-color: {{ route.color_code }}" class="routes-form-balloon">{{ route }}</span>
-          </label>
-      
-          {% endfor %}
-        </section>
-        {% endfor %}
-        {% csrf_token %}
-      </form>
-  </div>
-
-  <!-- 右側 -->
-  <div class="col-md-6">
-    <div class="routes-box">
-        <ul>
-          {% for company in company_list %}
-            <!-- 路線 -->
-            {% for route in company.route_set.all %}
-
-            <li>
-              <span for="route-{{ route.id }}" class="search-route {{ route.eng_name }}" 
-                      style="border: 10px solid {{ route.color_code }};">
-                  {{ route.eng_name }}
-              </span>
-              <span>
-                {{ route }}
-              </span>
-              <span class="X-mark float-right">
-                ❌
-              </span>
+            <li  class="search-route" style="border: 10px solid {{ route.color_code }};"
+                data-name="{{route}}" data-formid="station-form-{{route.id}}">
+                {{ route.eng_name }}
             </li>
-            {% endfor %}
           {% endfor %}
-        </ul>
-    </div>
-    <button id="submit-btn" class="btn-primary">この条件で検索</button>
-  </div>
-</div>
+        {% endfor %}
+    </ul>
 
+    <!-- 路線の企業 -->
+    <div class="color-box no-rotate" style="background-color: gray;"></div>
+    <div class="color-box no-rotate" style="background-color: #eedcb3;"></div>
+    <div class="color-box no-rotate"></div>
+    <!-- 駅選択のフォーム -->
+    <div id="station-form" class="no-rotate"></div>
+    
+    <!-- 各路線の駅を保持する -->
+    <div id="station-form-box" style="display: none;">
+      {% for company in company_list %}
+        <!-- 路線 -->
+        {% for route in company.route_set.all %}
+          <!-- 路線 -->
+          <section id="station-form-{{route.id}}" class="stations">
+            {% for station in route.station_set.all %}
+              <!-- 路線名情報 -->
+              
+              <label for="station-{{ station.id }}" class="search-station station-label" data-color="#cccccc" >
+                  <span class="label-before"></span>
+                  {{ station }}
+              </label>
+            {% endfor %}
+          </section>
+        {% endfor %}
+      {% endfor %}
+
+      <!-- 送信する値 -->
+      {% for company in company_list %}
+        {% for route in company.route_set.all %}
+          <!-- 路線 -->
+            {% for station in route.station_set.all %}
+              <!-- 路線名情報 -->
+              <input name="ek" class="ek-check" type="checkbox" id="station-{{ station.id }}" value="{{ station.code }}" />
+            {% endfor %}
+        {% endfor %}
+      {% endfor %}
+    </div><!-- end 各路線の駅を保持する -->
+  </div>
+
+
+  <!-- その他の条件一覧表示 -->
+  <div class="condition-box">
+    <div class="condition container">
+      <table class="row condition-table" style="height:100%;">
+        {% for group in condition_group_list %}
+        <tr class="condition-content" >
+          <!-- 条件のグループ名称 -->
+          <th class="condition-name">{{ group.name }}</th>
+          <th>
+          {% for condition in group.condition_set.all %}
+              {% if condition.input_type is 11 %}
+              <!-- selectboxの条件(左) -->
+                <div>
+                  <select name="{{ condition.input_name }}">
+                      {% for val in condition.conditionvalue_set.all|dictsort:"sort"%}
+                      <option value="{{ val.code }}" {{ val.is_default | yesno:'checked,' }}>
+                          {{ val.name }}
+                      </option>
+                      {% endfor %}
+                  </select>
+              {% elif condition.input_type is 19 %}
+                <!-- selectboxの条件(右) -->
+                  〜
+                  <select name="{{ condition.input_name }}">
+                      {% for val in condition.conditionvalue_set.all|dictsort:"sort" %}
+                      <option value="{{ val.code }}" {{ val.is_default | yesno:'checked,' }}>
+                          {{ val.name }}
+                      </option>
+                      {% endfor %}
+                  </select>
+                </div>
+              {% elif condition.input_type is 20 %}  
+              <!-- select box -->
+              
+              {% elif condition.input_type is 30 %}
+              <!-- checkbox -->
+                  {% for val in condition.conditionvalue_set.all|dictsort:"sort" %}
+                  <input type="checkbox" value="{{ val.code }}" name="{{ val.input_name }}" />
+                  <label for="{{ val.input_name }}">{{ val.name }}</label>
+                  {% endfor %}
+              {% elif condition.input_type is 40 %}
+              <!-- radio -->
+                  {% for val in condition.conditionvalue_set.all|dictsort:"sort" %}
+                  <input type="radio" value="{{ val.code }}" name="{{ val.input_name }}" {{ val.is_default | yesno:'checked,' }}>
+                  <label for="{{ val.input_name }}">{{ val.name }}</label>
+                  {% endfor %}
+              
+              {% endif %}
+          {% endfor %}
+        </th>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+  <!-- 固定送信-->
+  {% csrf_token %}
+
+  <!-- エリア（東京） -->
+  <input type="hidden" name="ar" value="030" />
+  <!-- 謎 -->
+  <input type="hidden" name="bs" value="040" />
+  <!-- 謎 -->
+  <input type="hidden" name="ra" value="013" />
+
+  <div class="submit-box ">
+      <button class="btn-success more-btn ">こだわりを追加</button>
+      <button type="submit" class="btn-primary submit-btn">検索</button>
+  </div>
+</form>
 {% endblock %}
 
 {% block extrajs %}
   <script ype="text/javascript" src="{% static 'AlohaHouse/js/search_routes.js' %}"></script>
+  <script ype="text/javascript" src="{% static 'AlohaHouse/js/jquery.scrollify.js' %}"></script>
 {% endblock %}
