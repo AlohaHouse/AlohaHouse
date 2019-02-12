@@ -307,7 +307,6 @@ class DetailView(TemplateView):
 
         response = json.dumps({'status': 1})
         return HttpResponse(response)
-        
 
 
         
