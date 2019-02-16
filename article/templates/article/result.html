@@ -1,25 +1,34 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% load resulttag %}
 
+{% block extracss %}
+    <link rel="stylesheet" href="{% static 'AlohaHouse/css/result.css' %}" />
+{% endblock %} 
 
 {% block content %}
+<h2>検索結果</h2>
 {% for i in 0|range:article_names %}
   <div class="article col-10 mx-auto">
     <div class="article_name"><b>{{ article_names|lookup:i }}</b></div>
     <div class="address">{{ addresses|lookup:i }}</div>
-    <div class="article_image"><img src='{{ article_images|lookup:i }}' alt="物件画像" /></div>
-    <div class="transportation">
-      {% for j in transportation_all|range2:i %}
-      <div>{% lookup2 transportation_all i j %}<br></div>
-      {% endfor %}
+    <div class="article-content clearfix">
+      <div class="article_image"><img src='{{ article_images|lookup:i }}' alt="物件画像" /></div>
+      <div class="article_info">
+        <div class="transportation">
+          {% for j in transportation_all|range2:i %}
+          <div>{% lookup2 transportation_all i j %}<br></div>
+          {% endfor %}
+        </div>
+        <div class="years">
+          {{ years|lookup:i }}
+        </div>
+        <div class="stories">
+            {{ stories|lookup:i }}
+        </div>
+      </div>
     </div>
-    <div class="years">
-      {{ years|lookup:i }}
-    </div>
-    <div class="stories">
-        {{ stories|lookup:i }}
-    </div>
+    
     <table class="table">
       <thead>
         <!-- 詳細は行をクリックすることによって遷移できる -->
@@ -31,28 +40,40 @@
           <th>管理費</th>
           <th>敷金/礼金</th>
         </tr>
-        {% for j in article_level_all|range2:i %}
-        <form action="{% url 'article:detail' %}" method="get">
-          <tr>
-            <td>{% lookup2 floor_plan_all i j %}
-              <div style="width:200px; height:200px; background-image: url('{% lookup2 floor_picture_all i j %}')">
-              </div>
-            </div>
-              {% lookup2 article_area_all i j %}m<sup>2</sup></td>
-            <td>{% lookup2 article_level_all i j %}</td>
-            <td>{% lookup2 article_rent_all i j %}</td>
-            <td>{% lookup2 article_administration_all i j %}</td>
-            <td>{% lookup2 article_deposit_all i j %} / {% lookup2 article_gratuity_all i j %}</td>
-          </tr>
-          <input type="hidden" name="url" value="{% lookup2 detail_url_all i j %}" >
-          <input type="submit" value="送信">
-        </form>
-        {% endfor %}
       </thead>
       <tbody>
+        {% for j in article_level_all|range2:i %}
+        <tr class="modal-open" id="{% lookup2 detail_url_all i j %}" onclick="getFunc(this.id)">
+          <td>{% lookup2 floor_plan_all i j %}
+            <div style="width:125px; height:125px; background-image: url('{% lookup2 floor_picture_all i j %}'); 
+            background-size: contain; background-repeat: no-repeat; background-position: center; margin: 0 auto;">
+            </div>
+            {% lookup2 article_area_all i j %}m<sup>2</sup>
+          </td>
+          <td style="vertical-align: middle;">{% lookup2 article_level_all i j %}</td>
+          <td style="vertical-align: middle;">
+            {% lookup2 article_rent_all i j %}<br>
+            {% lookup2 discount_rent_all i j %}<br>
+          </td>
+          <td style="vertical-align: middle;">{% lookup2 article_administration_all i j %}</td>
+          <td style="vertical-align: middle;">{% lookup2 article_deposit_all i j %} / {% lookup2 article_gratuity_all i j %}</td>
+        </tr>
+        {% endfor %}
       </tbody>
     </table>
-
   </div>
 {% endfor %}
+
+<!-- ここからモーダルウィンドウ -->
+<div id="modal-content">
+  <!-- モーダルウィンドウのコンテンツ開始 -->
+  <iframe src="" id="iframe" class="detail-iframe" style="width: 80vw; height:80vh;" >
+  </iframe>
+  <!-- モーダルウィンドウのコンテンツ終了 -->
+</div>
+<!-- ここまでモーダルウィンドウ -->
+{% endblock %}
+
+{% block extrajs %}
+<script ype="text/javascript" src="{% static 'AlohaHouse/js/result.js' %}"></script>
 {% endblock %}

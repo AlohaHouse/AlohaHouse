@@ -159,20 +159,40 @@ class ResultView(TemplateView):
             article_level_all.append(article_levels)
             article_levels = [] #1物件の階数全てを取得したので初期化
         
-        #建物の賃料取得（取得後2次元配列で保持）
+        #建物の賃料、管理費、割引賃料取得（取得後2次元配列で保持）
         article_rent_all = [] #全ての物件の賃料全てを格納(2次元配列)
         article_rents = [] #１物件の賃料全てを格納
         article_administration_all = [] #全ての物件の階数全てを格納(2次元配列)
         article_administrations = [] #１物件の階数全てを格納
+        discount_rent_all = [] #全ての物件の割引賃料全てを格納(2次元配列)
+        discount_rents = [] #１物件の割引賃料全てを格納
         for cassetteitem in cassetteitems:
             arg1 = cassetteitem.find("div", class_="cassetteitem-item")
             arg2 = cassetteitem.find_all("tbody")
             for arg3 in arg2:
                 arg4 = arg3.select_one("tr td:nth-of-type(4)") #nth-of-typeで何番目の要素なのか指定
                 arg5 = arg4.find("span", class_="cassetteitem_other-emphasis").text
+                arg6 = arg4.find("span", class_="cassetteitem_price--administration").text
+
                 article_rents.append(arg5)
+                article_administrations.append(arg6)
+                article_rent_value = arg5.strip("万円") #万円を取り除く
+                if arg6 == "-":#管理費がない場合を考慮
+                    article_administration_value = 0
+                else:
+                    article_administration_value = arg6.strip("円") #円を取り除く
+                
+                total = float(article_rent_value) * 10000 + float(article_administration_value)
+                if total >= 100000:
+                    discount_rents.append(total - 30000)
+                else:
+                    discount_rents.append((total * 0.7))
             article_rent_all.append(article_rents)
+            article_administration_all.append(article_administrations)
+            discount_rent_all.append(discount_rents)
             article_rents = [] #1物件の賃料全てを取得したので初期化
+            article_administrations = [] #1物件の管理費全てを取得したので初期化
+            discount_rents = []
 
         #詳細URL取得（取得後2次元配列で保持）
         detail_url_all = [] #全ての詳細URL全てを格納(2次元配列)
@@ -188,18 +208,7 @@ class ResultView(TemplateView):
             detail_url_all.append(detail_urls)
             detail_urls = [] #1物件の詳細URL全てを取得したので初期化
 
-        #建物の管理費取得（取得後2次元配列で保持）
-        article_administration_all = [] #全ての物件の階数全てを格納(2次元配列)
-        article_administrations = [] #１物件の階数全てを格納
-        for cassetteitem in cassetteitems:
-            arg1 = cassetteitem.find("div", class_="cassetteitem-item")
-            arg2 = cassetteitem.find_all("tbody")
-            for arg3 in arg2:
-                arg4 = arg3.select_one("tr td:nth-of-type(4)") #nth-of-typeで何番目の要素なのか指定
-                arg5 = arg4.find("span", class_="cassetteitem_price--administration").text
-                article_administrations.append(arg5)
-            article_administration_all.append(article_administrations)
-            article_administrations = [] #1物件の管理費全てを取得したので初期化
+        
 
         #建物の敷金、礼金取得（取得後2次元配列で保持）
         article_deposit_all = [] #全ての物件の敷金全てを格納(2次元配列)
@@ -261,7 +270,6 @@ class ResultView(TemplateView):
             floor_plan_all.append(floor_plans)
             floor_plans = [] #1物件の階数全てを取得したので初期化
 
-
         context["article_names"] = article_names
         context["addresses"] = addresses
         context["article_images"] = article_images
@@ -277,6 +285,8 @@ class ResultView(TemplateView):
         context["detail_url_all"] = detail_url_all
         context["years"] = years
         context["stories"] = stories
+        context["discount_rent_all"] = discount_rent_all
+        context["discount_rents"] = discount_rents
         return context
 
 
