@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
+from article.views import SearchRoutesView
 
 # path('アプリ名', include('アプリ名.urls'))
 urlpatterns = [
@@ -23,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('accounts.urls')),
     path('article/', include('article.urls')),
+    path('', SearchRoutesView.as_view(), name='root'),
 ]
 
 # デバッグ用
