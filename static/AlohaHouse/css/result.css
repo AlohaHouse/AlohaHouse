@@ -16,8 +16,6 @@
 }
 
 table{
-    border-collapse: separate;
-    border-spacing: 5px 0;
     margin: 0 auto;
 }
 td,th{
@@ -80,4 +78,8 @@ td{
   width:100%;
   height:120%;
   background-color:rgba(0,0,0,0.75);
+}
+
+table.table tr:hover {
+  background-color: #FFCC99;    /* マウスオーバー時の行の背景色 */
 }
