@@ -81,19 +81,17 @@ class ScrollRoutes {
         // 選択対象のインデックス
         this._baseIndex = 4;
         // 現在のインデックス
-        this._fowardIndex = 4;
+        this._fowardIndex = 13;
 
         // リストのオブジェクトを作成
         var self = this;
-        var index = 0;
+        var index = -9;
         this.$routeList.each(function() {
 
             let route = $(this);
             self._routeObjectList.push(new Route(route, self , self._trainSvg, index));
             index++;
         })
-
-
     }
 
     indicateContentAll() {

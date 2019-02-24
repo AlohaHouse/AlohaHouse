@@ -138,7 +138,7 @@ STATICFILES_DIRS = (
 
 LOGIN_URL = 'accounts:login'
 # ログイン後の遷移先
-LOGIN_REDIRECT_URL = 'accounts:mypage'
+LOGIN_REDIRECT_URL = 'article:search_routes'
 
 # ログアウト後の遷移先
 LOGOUT_REDIRECT_URL = 'accounts:login'
