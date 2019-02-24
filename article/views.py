@@ -47,6 +47,7 @@ class SearchRoutesView(View):
         context = {}
         # 路線会社一覧を格納
         context['company_list'] = Company.objects.all()
+        context['history_list'] = History.objects.all()[:10]
         # こだわりを取得
         context['condition_group_list'] = ConditionsGroup.objects.filter(is_active=True)
         return context
@@ -68,9 +69,17 @@ class ResultView(TemplateView):
     def get_context_data(self,request, **kwargs):
         # アクセスするURL（実際はセッションから取得）
         data = request.session['search_data']
+        try:
+            url_data = request.session['history_url']
+        except KeyError:
+            url_data = None
+
         # suumoのURLを取得
-        url = data.get_suumo_params()
-        # url = "https://suumo.jp/jj/chintai/ichiran/FR301FC001/?ar=030&bs=040&ra=013&cb=0.0&ct=9999999&et=9999999&cn=9999999&mb=0&mt=9999999&shkr1=03&shkr2=03&shkr3=03&shkr4=03&fw2=&ek=000525620&rn=0005"
+        if url_data:
+            url = url_data
+            request.session['url'] = None
+        else:
+            url = data.get_suumo_params()
 
         print(url)
         # URLにアクセスする htmlが返ってくる → <html><head><title></title></head><body....
@@ -288,35 +297,3 @@ class ResultView(TemplateView):
         context["discount_rent_all"] = discount_rent_all
         context["discount_rents"] = discount_rents
         return context
-
-
-class DetailView(TemplateView):
-    template_name = 'article/detail.html'
-
-
-    def get(self, request, **kwargs):
-        context = {}
-        context['article_url'] = request.GET.get('url')
-        return render(request, self.template_name, context)
-
-    
-    def post(self, request, **kwargs):
-        url = "https://suumo.jp/" + request.POST.get('url')
-        # URLにアクセスする htmlが返ってくる → <html><head><title></title></head><body....
-        html = urllib.request.urlopen(url=url)
-
-        # htmlをBeautifulSoupで扱う
-        soup = BeautifulSoup(html, "html.parser")
-        name = soup.find('h1', class_="section_h1-header-title").text
-
-        favorite = Favorite()
-        favorite.name = name
-        favorite.url = request.POST.get('url')
-        favorite.user = request.user
-        favorite.save()
-
-        response = json.dumps({'status': 1})
-        return HttpResponse(response)
-
-
-        

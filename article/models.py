@@ -24,4 +24,4 @@ class Favorite(models.Model):
     )
 
     def __str__(self):
-        return self.url
+        return self.name
