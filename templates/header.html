@@ -1,5 +1,5 @@
 {% load static%}
-<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm" >
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 bg-white border-bottom shadow-sm" >
     {% include 'logo.html' %}
     <nav class="my-2 my-md-0 mr-md-3">
         <a class="p-2 text-dark" href="{% url 'article:search_routes' %}">Search</a>
@@ -11,6 +11,29 @@
         {% endif %}
     </nav>
 </div>
+
+{% for error in form.non_field_errors %}
+    <div class="error-message">{{ error }}</div>
+{% endfor %}
+
+{% for field, errors in form.errors.items %}
+    {% for error in errors %}
+        <div class="error-message">{{ error }}</div>
+    {% endfor %}
+{% endfor %}
+
+
+<style type="text/css">
+.error-message {
+    background-color: rgb(233, 8, 139); 
+    color: white;
+    font-size: 1.5vh;
+    width: 100vw;
+    height: 2vh;
+    text-align: center;
+    vertical-align: middle;
+}
+</style>
 
 
 
