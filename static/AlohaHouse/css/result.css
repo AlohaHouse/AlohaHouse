@@ -1,9 +1,10 @@
 .article_name {
-  font-size: 32px;
+  font-size: 2.8vh;
 }
 
 .article {
-  width: 1000px;
+  font-size: 1.8vh;
+  width: 1200px;
 }
 
 .article_image {
@@ -12,7 +13,7 @@
 }
 .article_info {
   float: left;
-  margin: 8vh 8vw;
+  margin: 4vh 10vw;
 }
 
 table{
@@ -42,6 +43,22 @@ th:nth-child(5){
 }
 td{
   color: #000;
+}
+
+td:nth-child(1){
+  background: rgba(42, 145, 142, 0.08);
+}
+td:nth-child(2){
+  background: rgba(51, 119, 168, 0.08);
+}
+td:nth-child(3){
+  background: rgba(209, 212, 100, 0.08);
+}
+td:nth-child(4){
+  background: rgba(191, 87, 98, 0.08);
+}
+td:nth-child(5){
+  background: rgba(123, 87, 161, 0.08);
 }
 #modal-content{
   width: 80vw;
