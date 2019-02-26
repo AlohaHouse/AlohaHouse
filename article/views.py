@@ -97,6 +97,8 @@ class ResultView(TemplateView):
         # 物件情報を取得(classは予約語なのでアンダースコアで回避)
         cassetteitems = soup.find_all("div", class_="cassetteitem")
 
+        search_page_title = soup.select_one("body > div.wrapper > div > div.ui-section-header > h1").text
+        
         #物件名取得（取得後配列で保持）
         article_names = [] #配列の初期化
         for cassetteitem in cassetteitems:
@@ -173,6 +175,8 @@ class ResultView(TemplateView):
         article_rents = [] #１物件の賃料全てを格納
         article_administration_all = [] #全ての物件の階数全てを格納(2次元配列)
         article_administrations = [] #１物件の階数全てを格納
+        rent_total_all = [] #全ての物件の賃料+管理費全てを格納(2次元配列)
+        total_rents = [] #１物件の賃料+管理費全てを格納
         discount_rent_all = [] #全ての物件の割引賃料全てを格納(2次元配列)
         discount_rents = [] #１物件の割引賃料全てを格納
         for cassetteitem in cassetteitems:
@@ -192,16 +196,19 @@ class ResultView(TemplateView):
                     article_administration_value = arg6.strip("円") #円を取り除く
                 
                 total = float(article_rent_value) * 10000 + float(article_administration_value)
+                total_rents.append(total / 10000)
                 if total >= 100000:
-                    discount_rents.append(total - 30000)
+                    discount_rents.append((total - 30000) / 10000)
                 else:
-                    discount_rents.append((total * 0.7))
+                    discount_rents.append(round((total * 0.7) / 10000,1))
             article_rent_all.append(article_rents)
             article_administration_all.append(article_administrations)
             discount_rent_all.append(discount_rents)
+            rent_total_all.append(total_rents)
             article_rents = [] #1物件の賃料全てを取得したので初期化
             article_administrations = [] #1物件の管理費全てを取得したので初期化
             discount_rents = []
+            total_rents = []
 
         #詳細URL取得（取得後2次元配列で保持）
         detail_url_all = [] #全ての詳細URL全てを格納(2次元配列)
@@ -293,7 +300,9 @@ class ResultView(TemplateView):
         context["transportation_all"] = transportation_all
         context["detail_url_all"] = detail_url_all
         context["years"] = years
+        context["search_page_title"] = search_page_title
         context["stories"] = stories
+        context["rent_total_all"] = rent_total_all
         context["discount_rent_all"] = discount_rent_all
         context["discount_rents"] = discount_rents
         return context

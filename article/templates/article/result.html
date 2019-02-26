@@ -7,9 +7,9 @@
 {% endblock %} 
 
 {% block content %}
-<h2>検索結果</h2>
+<h2 style="font-size: 2vh">{{ search_page_title }}</h2>
 {% for i in 0|range:article_names %}
-  <div class="article col-10 mx-auto">
+  <div class="article">
     <div class="article_name"><b>{{ article_names|lookup:i }}</b></div>
     <div class="address">{{ addresses|lookup:i }}</div>
     <div class="article-content clearfix">
@@ -36,9 +36,9 @@
           <!-- 間取り画像の上か下に1LDKなどを表示する -->
           <th>間取り/専有面積</th>
           <th>階数</th>
-          <th>賃料</th>
-          <th>管理費</th>
-          <th>敷金/礼金</th>
+          <th>賃料 / 管理費</th>
+          <th>賃料 + 管理費</th>
+          <th>敷金 / 礼金</th>
         </tr>
       </thead>
       <tbody>
@@ -53,9 +53,13 @@
           <td style="vertical-align: middle;">{% lookup2 article_level_all i j %}</td>
           <td style="vertical-align: middle;">
             {% lookup2 article_rent_all i j %}<br>
-            {% lookup2 discount_rent_all i j %}<br>
+            {% lookup2 article_administration_all i j %}<br>
           </td>
-          <td style="vertical-align: middle;">{% lookup2 article_administration_all i j %}</td>
+          <td style="vertical-align: middle;">
+            {% lookup2 rent_total_all i j %}<span>万円</span><br>
+            <span><b>ウィズイン5制度</b>を使うと</span><br>
+            <span style="color: rgb(247, 28, 75);"><b>{% lookup2 discount_rent_all i j %}万円！！</b></span>
+          </td>
           <td style="vertical-align: middle;">{% lookup2 article_deposit_all i j %} / {% lookup2 article_gratuity_all i j %}</td>
         </tr>
         {% endfor %}
