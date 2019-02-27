@@ -3,14 +3,6 @@
 {% load widget_tweaks %}
 
 {% block content %}
-
-{% for field, errors in form.errors.items %}
-    {% for error in errors %}
-        <p class="alert alert-danger">{{ error }}</p>
-    {% endfor %}
-{% endfor %}
-
-
 <div class="signup-box">
     <div class="signup-title">Signup</div>
     <section>
