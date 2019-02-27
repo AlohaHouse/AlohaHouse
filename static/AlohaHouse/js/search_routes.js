@@ -220,7 +220,7 @@ class Route {
         // ラジアンに変換
         var radian = degree * (Math.PI / 180);
         // 半径
-        var radius = 850;
+        var radius = 0.58 * $('#routes-form').width();
         var cos = Math.cos(radian);
         var sin = Math.sin(radian);
 
