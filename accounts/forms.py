@@ -36,7 +36,7 @@ class SignUpForm(UserCreationForm):
 
         result = re.match('^[a-z0-9]+\.[a-z0-9]+@m.alhinc.jp$',email)
         if not result:
-            raise forms.ValidationError("メールちがう")
+            raise forms.ValidationError("社用メールアドレスのみ登録可能です")
         return email
 
 
