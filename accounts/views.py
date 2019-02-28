@@ -18,7 +18,7 @@ from article.models import (
 
 class SignUpView(generic.CreateView):
     template_name = 'accounts/signup.html'
-    success_url = reverse_lazy('article:search')
+    success_url = reverse_lazy('article:login')
     form_class = SignUpForm
 
 

@@ -5,7 +5,7 @@
 #routes-form {
     position: relative;
     width: 100vw;
-    height: calc(100vh - 99px);
+    height: calc(100vh - 82px);
     overflow: hidden;
 }
 
@@ -50,8 +50,6 @@
     position: absolute;
     height: 500px;
     width: 500px;
-    top: 170px;
-    left: 500px;
     opacity: 0.3; 
     transform: scale(0.1);
     transition: 1s;
@@ -176,6 +174,7 @@
     overflow: hidden;
     z-index: 400;
     background-color: white;
+    font-size: 1.5em;
 }
 
 .condition {
