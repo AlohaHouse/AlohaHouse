@@ -4,25 +4,31 @@
 
 {% block content %}
 <div class="signup-box">
-    <div class="signup-title">Signup</div>
-    <section>
-        <form class="form-horizontal" role="form" method="post">
-        {{ form.username|add_class:"input-signup" }}
-        <input type="text" name="email" class="form-control input-signup" id="email" placeholder="E-Mail" required="" autofocus="">
-        <input type="password" name="password1" class="form-control input-signup" id="password" placeholder="Password" required="">
-        <input type="password" name="password2" class="form-control input-signup" id="password-confirm" placeholder="Confirm Password" required="">
-        <button type="submit" class="signup-button">Signup for ALOHA HOUSE</button>
-        {% csrf_token %}
-        </form>
-    </section>
+    <div class="signup-contents">
+        <div class="signup-title">SIGNUP</div>
+        <section>
+            <form class="form-horizontal" role="form" method="post">
+                <label class="input-title">USERNAME</label>
+            {{ form.username|add_class:"input-signup" }}
+            <label class="input-title">EMAIL</label>
+            <input type="text" name="email" class="form-control input-signup" id="email" required="">
+            <label class="input-title">PASSWORD</label>
+            <input type="password" name="password1" class="form-control input-signup" id="password" required="">
+            <label class="input-title">CONFIRM PASSWORD</label>
+            <input type="password" name="password2" class="form-control input-signup" id="password-confirm" required="">
+            <button type="submit" class="signup-button">Signup for ALOHA HOUSE</button>
+            {% csrf_token %}
+            </form>
+        </section>
+    </div>
 </div>
 
     <style type="text/css">
         body {
-        background-image: url("/static/AlohaHouse/img/signup-image.jpg");
-        background-size: cover;
-        background-position: center center; 
-        background-attachment: fixed;
+            background-image: url("/static/AlohaHouse/img/signup-image.jpg");
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
         }
 
         .signup-title {
@@ -32,23 +38,44 @@
             margin-bottom: 3vh;
         }
 
+        .signup-contents {
+            width: 60%;
+            margin: 0 auto;
+        }
+
         .signup-box {
             position: absolute;
-            top: -35vh;
+            top: 0vh;
             right: 0;
             bottom: 0;
             left: 0;
             margin: auto;
-            width: 30vw;
-            height: 3.2rem;
+            width: 40vw;
+            height: 50vh; 
+            background-color: rgba(33, 39, 98, 0.7);
+        }
+        .input-title {
+            color: white;
+        }
+        .input-signup {
+            border: none;
+            background-color: rgba(33, 39, 98, 0);
+            color:white;
+            margin-bottom: 1vh;
+            outline: 0;
+            border-bottom: 2px solid #d1d5db;
         }
 
-        .input-signup {
-            margin-bottom: 1vh;
+        input[type="text"]:focus, input[type="password"]:focus{
+            border: none;
+            color:white;
+            background-color: rgba(33, 39, 98, 0);
+            outline: 0;
         }
 
         .signup-button {
-            width: 30vw;
+            margin-top: 40px;
+            width: 100%;
             background-color: rgb(247,43,90);
             color: white;
             border: none;
