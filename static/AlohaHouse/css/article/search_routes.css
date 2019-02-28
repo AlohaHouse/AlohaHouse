@@ -59,8 +59,6 @@
     position: absolute;
     height: 500px;
     width: 500px;
-    top: 170px;
-    left: 500px;
     transition: 1s;
     font-size: 30px;
 }
