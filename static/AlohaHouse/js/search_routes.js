@@ -265,8 +265,8 @@ class ColorBox {
         this.$stationForm = $('#station-form');
         this.$content.each(function(i){
             $(this).addClass("rotate-" + (i + 1));
-            var top = 0.34 * 500;
-            var left = 0.35714286 * 1400;
+            var top = 0.23 * $('#routes-form').height();
+            var left = 0.35714286 * $('#routes-form').width();
             $(this).css("top", top);
             $(this).css("left", left);
 
