@@ -269,9 +269,8 @@ class ColorBox {
             var left = 0.35714286 * $('#routes-form').width();
             $(this).css("top", top);
             $(this).css("left", left);
-            this.$stationForm.css("top", top);
-            this.$stationForm.css("left", left);
-
+            $('#station-form').css("top", top);
+            $('#station-form').css("left", left);
         })
     }
 
