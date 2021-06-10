@@ -1,4 +1,4 @@
-Django==2.0.2
+Django==2.2.24
 # 画像処理、投稿など
 Pillow==5.3.0
 PyMySQL==0.9.2
