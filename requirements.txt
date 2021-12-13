@@ -11,7 +11,7 @@ django-pdb==0.6.2
 django-widget-tweaks==1.4.3
 flake8==3.5.0
 idna==2.7
-lxml==4.2.5
+lxml==4.6.5
 mccabe==0.6.1
 numpy==1.15.4
 pbr==5.1.1
